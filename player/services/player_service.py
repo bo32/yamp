@@ -24,19 +24,20 @@ class PlayerService(object):
             cls._instance = super(PlayerService, cls).__new__(cls)
             cls._instance.instance = vlc.Instance('--loop')
             cls._instance.list_player = cls._instance.instance.media_list_player_new()
+            cls._instance.played_album = None
         return cls._instance
 
     def get_media_player(self):
         return self.list_player.get_media_player()
 
     def get_current_track(self):
-        index = self.get_media_player().audio_get_track()
-        current_track = self.played_album.item_at_index(index)
+        if self.played_album is None:
+            return {'title': 'nothing'}
+
+        current_track = self.get_media_player().get_media()
         current_track.parse()
         result = {}
         for key in META_DICTIONARY.keys():
-            print(key)
-            print(current_track.get_meta(META_DICTIONARY[key]))
             result[key] = current_track.get_meta(META_DICTIONARY[key])
         return result
 

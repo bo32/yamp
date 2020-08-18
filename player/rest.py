@@ -15,6 +15,7 @@ def play(request, album):
 
 def next(request):
     player_service.next()
+    print('next')
     return HttpResponse('NEXT')
 
 def previous(request):

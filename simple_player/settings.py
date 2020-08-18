@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from socket import gethostname, gethostbyname
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = '$m919ome9r3=5id2_lpq-r6^8rq+l^jqfxx(oko3alx6h!i^bg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', gethostname(), gethostbyname(gethostname())]
 
 
 # Application definition
@@ -119,3 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+PORT = '8000'
+
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'player', 'static'),
+]
+CORS_ORIGIN_ALLOW_ALL = True
+

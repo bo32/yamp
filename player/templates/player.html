@@ -1,1 +1,28 @@
-Currently playing {{ title }}
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Player</title>
+
+</head>
+<body>
+    <p>Currently playing {{ title }}</p>
+
+    <button onclick="previous()">Back</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="next()">Next</button>
+
+    <script src="{% static 'js/player.js' %}"></script>
+</body>
+
+
+
+
+<!--<button type="submit" formaction="player/next">Next</button>-->
+<!--<button name="Next" onclick="window.location.href='http://localhost:8000/player/next';">Next</button>-->
+
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/player.js"></script>-->
+
+
