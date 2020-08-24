@@ -12,7 +12,7 @@ def show_player(request):
     # get music library folder
     from player.global_properties import global_properties
     from pathlib import Path
-    library_folder = Path(global_properties['DEFAULT']['library_path'])
+    library_folder = Path(global_properties['server']['library_path'])
     folder = [x.name for x in library_folder.iterdir() if x.is_dir()]
 
     content = {

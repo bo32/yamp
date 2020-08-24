@@ -77,7 +77,7 @@ class PlayerService(object):
     def play(self, directory):
         from player.global_properties import global_properties
         from pathlib import Path
-        library_folder = Path(global_properties['DEFAULT']['library_path'])
+        library_folder = Path(global_properties['server']['library_path'])
         dir_to_play = library_folder.joinpath(directory)
         print('playing album ' + str(dir_to_play))
 
