@@ -10,6 +10,10 @@ function next() {
     send('next');
 }
 
+function play(folder) {
+    send('play/' + folder);
+}
+
 function send(action) {
     const http = new XMLHttpRequest();
     http.open("GET", action);

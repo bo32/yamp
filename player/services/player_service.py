@@ -73,7 +73,11 @@ class PlayerService(object):
         self.list_player.previous()
 
     def play(self, directory):
-        dir_to_play = "/home/david/Music/ACDC/" + directory
+        from player.global_properties import global_properties
+        from pathlib import Path
+        library_folder = Path(global_properties['DEFAULT']['library_path'])
+        dir_to_play = library_folder.joinpath(directory)
+        dir_to_play = str(dir_to_play)
         print('playing album ' + dir_to_play)
 
         self.played_album = self.instance.media_list_new()
@@ -82,6 +86,7 @@ class PlayerService(object):
             media = self.instance.media_new(os.path.join(dir_to_play, song))
             self.played_album.add_media(media)
 
+        self.list_player.stop()
         self.list_player.set_media_list(self.played_album)
         self.list_player.play()
         print('Playing music...')

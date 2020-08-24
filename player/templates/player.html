@@ -10,11 +10,16 @@
 
 </head>
 <body>
-    <p>Currently playing {{ title }}</p>
+    <p>Currently playing: {{ current_track.title }}</p>
 
     <button onclick="previous()">Back</button>
     <button onclick="pause()">Pause</button>
     <button onclick="next()">Next</button>
+
+    <p>Music Library:</p>
+    {% for f in folder %}
+        <p><button onclick="play('{{ f }}')">Play</button> {{ f }}</p>
+    {% endfor %}
 
     <script src="{% static 'js/player.js' %}"></script>
 </body>
