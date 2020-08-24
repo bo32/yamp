@@ -79,17 +79,32 @@ class PlayerService(object):
         from pathlib import Path
         library_folder = Path(global_properties['DEFAULT']['library_path'])
         dir_to_play = library_folder.joinpath(directory)
-        dir_to_play = str(dir_to_play)
-        print('playing album ' + dir_to_play)
+        print('playing album ' + str(dir_to_play))
 
         self.played_album = self.instance.media_list_new()
-        # TODO filter only sound files
-        for song in os.listdir(dir_to_play):
-            print('Adding ' + os.path.join(dir_to_play, song))
-            media = self.instance.media_new(os.path.join(dir_to_play, song))
-            self.played_album.add_media(media)
+        self.add_folder_to_playlist(dir_to_play)
 
-        self.list_player.stop()
+        self.list_player.stop() # clear current playlist
         self.list_player.set_media_list(self.played_album)
         self.list_player.play()
         print('Playing music...')
+
+    def add_folder_to_playlist(self, folder):
+        for file in folder.iterdir():
+            if self.is_directory(file):
+                # Recursive call if we have another folder
+                print('Adding files from folder ' + file.name)
+                self.add_folder_to_playlist(file)
+            elif self.is_audio_file(file):
+                print('Adding song ' + file.name)
+                media = self.instance.media_new(str(file))
+                self.played_album.add_media(media)
+            else:
+                print('Skipping non-audio file ' + file.name)
+                pass
+
+    def is_audio_file(self, file_path):
+        return file_path.suffix.upper() in ['.MP3', '.FLAC', '.OGG', '.WAV', '.WMA', '.AAC', '.ALAC']
+
+    def is_directory(self, file_path):
+        return file_path.is_dir()
