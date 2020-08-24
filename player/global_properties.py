@@ -18,5 +18,10 @@ global_properties = configparser.ConfigParser()
 global_properties.read(str(properties_file_path))
 
 print('Global properties:')
+# print('Loaded properties:')
+# for section in global_properties.sections():
+#     print('[{}]'.format(section))
+#     for key in global_properties[section]:
+#         print(' - {}: {}'.format(key, global_properties[section][key]))
 for key in global_properties['DEFAULT']:
     print(' - {}: {}'.format(key, global_properties['DEFAULT'][key]))

@@ -27,7 +27,9 @@ SECRET_KEY = '$m919ome9r3=5id2_lpq-r6^8rq+l^jqfxx(oko3alx6h!i^bg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', gethostname(), gethostbyname(gethostname())]
+# Be careful with this parameter if you expose your service on the web!
+ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', gethostname()]
 
 
 # Application definition

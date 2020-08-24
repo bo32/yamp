@@ -20,11 +20,13 @@ class PlayerService(object):
     # https://python-patterns.guide/gang-of-four/singleton/#a-more-pythonic-implementation
     def __new__(cls):
         if cls._instance is None:
-            print('Creating the object')
+            print('Initializing Player Service...')
             cls._instance = super(PlayerService, cls).__new__(cls)
+            # FIXME I guess some errors are triggered from here is VLC is not installed on the machine. Errors to be caught
             cls._instance.instance = vlc.Instance('--loop')
             cls._instance.list_player = cls._instance.instance.media_list_player_new()
             cls._instance.played_album = None
+            print('Player Service initialized...')
         return cls._instance
 
     def get_media_player(self):
@@ -81,6 +83,7 @@ class PlayerService(object):
         print('playing album ' + dir_to_play)
 
         self.played_album = self.instance.media_list_new()
+        # TODO filter only sound files
         for song in os.listdir(dir_to_play):
             print('Adding ' + os.path.join(dir_to_play, song))
             media = self.instance.media_new(os.path.join(dir_to_play, song))
