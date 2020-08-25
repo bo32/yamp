@@ -26,6 +26,7 @@ class PlayerService(object):
             cls._instance.instance = vlc.Instance('--loop')
             cls._instance.list_player = cls._instance.instance.media_list_player_new()
             cls._instance.played_album = None
+            cls._instance.played_stream = None
             print('Player Service initialized...')
         return cls._instance
 
@@ -33,15 +34,17 @@ class PlayerService(object):
         return self.list_player.get_media_player()
 
     def get_current_track(self):
-        if self.played_album is None:
-            return {'title': 'nothing'}
+        if self.played_album is not None:
+            current_track = self.get_media_player().get_media()
+            current_track.parse()
+            result = {}
+            for key in META_DICTIONARY.keys():
+                result[key] = current_track.get_meta(META_DICTIONARY[key])
+            return result
+        if self.played_stream is not None:
+            return {'title': 'url'} # TODO set to the played URL
 
-        current_track = self.get_media_player().get_media()
-        current_track.parse()
-        result = {}
-        for key in META_DICTIONARY.keys():
-            result[key] = current_track.get_meta(META_DICTIONARY[key])
-        return result
+        return {'title': 'nothing'}
 
     def change_sound(self, direction):
         current_volume = self.get_current_volume()
@@ -104,7 +107,15 @@ class PlayerService(object):
                 pass
 
     def is_audio_file(self, file_path):
+        # TODO check mime type https://github.com/ahupp/python-magic
         return file_path.suffix.upper() in ['.MP3', '.FLAC', '.OGG', '.WAV', '.WMA', '.AAC', '.ALAC']
 
     def is_directory(self, file_path):
         return file_path.is_dir()
+
+    def play_url(self, url):
+        self.list_player.stop() # TODO need to find a better way to stop player and clean current media / media list
+        self.played_stream = self.instance.media_new(url)
+        self.get_media_player().set_media(self.played_stream)
+        self.get_media_player().play()
+        print('Playing URL...')

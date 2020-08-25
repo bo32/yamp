@@ -10,7 +10,12 @@ if not properties_file_path.exists():
     properties_file_path.touch()
     with open(str(properties_file_path), 'w') as file:
         file.write('[server]\n')
-        file.write('library_path=~/Music\n')
+        file.write('library_path=~/Music\n') # TODO replace ~ by /home/user
+        file.write('\n')
+        file.write('[urls]\n')
+        file.write('# Add your URLs below (eg. franceinter=http://direct.franceinter.fr/live/franceinter-midfi.mp3\n')
+else:
+    pass # TODO check if all sections are present
 
 # TODO add a listener on the config files and restart/update app ?
 import configparser

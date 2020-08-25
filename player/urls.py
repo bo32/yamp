@@ -11,5 +11,8 @@ urlpatterns = [
     path('next/', rest.next),
     path('previous/', rest.previous),
     path('soundup/', rest.sound_up),
-    path('sounddown/', rest.sound_down)
+    path('sounddown/', rest.sound_down),
+    path('toggle_mute/', rest.toggle_mute),
+
+    path('play_url/<url_key>', rest.play_url)
 ]
