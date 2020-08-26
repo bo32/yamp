@@ -1,4 +1,6 @@
-# Yet Another Music Player for the Raspberry Pi
+# Yet Another Music Player for the Raspberry Pi 
+
+[![Build Status](https://travis-ci.org/bo32/yamp-pi.svg?branch=master)](https://travis-ci.org/bo32/yamp-pi)
 
 ## Installation (for the RPi)
 
