@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from player.services.player_service import PlayerService
 from player.services.url_service import UrlService
@@ -37,9 +37,10 @@ def sound_down(request):
     return HttpResponse('SOUND_DOWN')
 
 @require_http_methods(["GET"])
-def toggle_mute(request):
-    #TODO PlayerService().toggle_mute()
-    return HttpResponse('TOGGLE MUTE')
+def mute(request):
+    muted = PlayerService().toggle_mute()
+    response_data = {'muted': muted}
+    return JsonResponse(response_data)
 
 # Audio stream
 @require_http_methods(["GET"])

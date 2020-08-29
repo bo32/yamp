@@ -68,6 +68,11 @@ class PlayerService(object):
     def get_current_volume(self):
         return self.get_media_player().audio_get_volume()
 
+    def toggle_mute(self):
+        print('mute')
+        self.get_media_player().audio_toggle_mute()
+        return self.get_media_player().audio_get_mute()
+
     def pause(self):
         self.list_player.pause()
 

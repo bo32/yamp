@@ -12,7 +12,7 @@ urlpatterns = [
     path('previous/', rest.previous),
     path('soundup/', rest.sound_up, name='soundup'),
     path('sounddown/', rest.sound_down),
-    path('toggle_mute/', rest.toggle_mute),
-    path('shutdown/', rest.toggle_mute),
+    path('mute/', rest.mute),
+#     path('shutdown/', rest.toggle_mute),
     path('play_url/<url_key>', rest.play_url)
 ]
