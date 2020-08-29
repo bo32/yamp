@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 
-from player.rest import sound_up
+from player.rest import *
 from player.views import show_player
 
 class TestUrls(SimpleTestCase):
