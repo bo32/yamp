@@ -17,3 +17,7 @@ application = get_wsgi_application()
 
 # Load global properties
 import player.global_properties
+
+# TODO Add option to auto turn off
+
+# TODO enable gamepads controlling
