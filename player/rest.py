@@ -8,18 +8,21 @@ from django.views.decorators.http import require_http_methods
 @require_http_methods(["GET"])
 def play(request, album):
     PlayerService().play(album)
-    return HttpResponse('PLAYING')
+    current_track = PlayerService().get_current_track()
+#     return HttpResponse('PLAYING')
+    return JsonResponse(current_track)
 
 @require_http_methods(["GET"])
 def next(request):
     PlayerService().next()
-    print('next')
-    return HttpResponse('NEXT')
+    current_track = PlayerService().get_current_track()
+    return JsonResponse(current_track)
 
 @require_http_methods(["GET"])
 def previous(request):
     PlayerService().previous()
-    return HttpResponse('PREVIOUS')
+    current_track = PlayerService().get_current_track()
+    return JsonResponse(current_track)
 
 @require_http_methods(["GET"])
 def pause(request):
