@@ -2,6 +2,7 @@ _MUTE = 'mute'
 _SOUND_UP = 'sound_up'
 _SOUND_DOWN = 'sound_down'
 _PLAY = 'play/'
+_PLAY_URL = 'play_url/'
 _NEXT = 'next'
 _PREVIOUS = 'previous'
 
@@ -33,17 +34,22 @@ function play(folder) {
     send(_PLAY + folder);
 }
 
+function play_url(url_key) {
+    send(_PLAY_URL + url_key);
+}
+
 function send(action) {
     const http = new XMLHttpRequest();
     http.onreadystatechange = function() {
         if (http.readyState == XMLHttpRequest.DONE) {
-            const json_response = JSON.parse(http.responseText);
-            if (action.startsWith(_PLAY)) {
+            if (action.startsWith(_PLAY_URL)) {
+                // TODO
+            } else if (action.startsWith(_PLAY)) {
+                const json_response = JSON.parse(http.responseText);
                 update_current_track(json_response);
             } else { // bit ugly this
+                const json_response = JSON.parse(http.responseText);
                 switch (action) {
-                    case
-
                     case _MUTE:
                         document.getElementById("mute_button").innerHTML = json_response.muted ? "Unmute" : "Mute";
                         break;

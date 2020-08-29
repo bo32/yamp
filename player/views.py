@@ -15,9 +15,13 @@ def show_player(request):
     library_folder = Path(global_properties['server']['library_path'])
     folder = [x.name for x in library_folder.iterdir() if x.is_dir()]
 
+    playlists_section = global_properties['urls']
+    urls = [{ 'key': key, 'url': playlists_section[key] } for key in playlists_section]
+
     content = {
         'current_track': current_track,
-        'folder': folder
+        'folder': folder,
+        'urls': urls
     }
 
     return render(request, 'player.html', content)

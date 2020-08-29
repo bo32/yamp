@@ -25,6 +25,12 @@
     {% for f in folder %}
         <p><button onclick="play('{{ f }}')">Play</button> {{ f }}</p>
     {% endfor %}
+    <br />
+
+    <p>Streams Library:</p>
+    {% for url in urls %}
+        <p><button onclick="play_url('{{ url.key }}')">Play</button> {{ url.key }}: {{ url.url }}</p>
+    {% endfor %}
 
     <script src="{% static 'js/player.js' %}"></script>
 </body>
