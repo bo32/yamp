@@ -104,7 +104,7 @@ class PlayerService(object):
         print('Playing music...')
 
     def add_folder_to_playlist(self, folder):
-        for file in folder.iterdir():
+        for file in sorted(folder.iterdir()):
             if self.is_directory(file):
                 # Recursive call if we have another folder
                 print('Adding files from folder ' + file.name)

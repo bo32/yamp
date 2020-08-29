@@ -41,8 +41,6 @@ function send(action) {
                     break;
                 case _SOUND_DOWN:
                 case _SOUND_UP:
-                    console.log(json_response.is_sound_max);
-                    console.log(json_response.is_sound_min);
                     document.getElementById("sound_down").disabled = json_response.is_sound_min;
                     document.getElementById("sound_up").disabled = json_response.is_sound_max;
                     break;
