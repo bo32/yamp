@@ -60,10 +60,16 @@ class PlayerService(object):
     def sound_up(self):
         print('sound up')
         self.change_sound('up')
+        return {
+            "is_sound_max" : self.get_current_volume() == VOLUME_MAX,
+            "is_sound_min" : self.get_current_volume() == VOLUME_MIN }
 
     def sound_down(self):
         print('sound down')
         self.change_sound('down')
+        return {
+            "is_sound_max" : self.get_current_volume() == VOLUME_MAX,
+            "is_sound_min" : self.get_current_volume() == VOLUME_MIN }
 
     def get_current_volume(self):
         return self.get_media_player().audio_get_volume()

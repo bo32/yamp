@@ -28,13 +28,13 @@ def pause(request):
 
 @require_http_methods(["GET"])
 def sound_up(request):
-    PlayerService().sound_up()
-    return HttpResponse('SOUND_UP')
+    data = PlayerService().sound_up()
+    return JsonResponse(data)
 
 @require_http_methods(["GET"])
 def sound_down(request):
-    PlayerService().sound_down()
-    return HttpResponse('SOUND_DOWN')
+    data = PlayerService().sound_down()
+    return JsonResponse(data)
 
 @require_http_methods(["GET"])
 def mute(request):
