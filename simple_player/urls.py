@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('player/', include('player.urls')),
-    path('gamepads/', include('gamepads.urls')),
+    path('devices/', include('devices.urls')),
 ]

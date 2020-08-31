@@ -10,7 +10,8 @@ if not properties_file_path.exists():
     properties_file_path.touch()
     with open(str(properties_file_path), 'w') as file:
         file.write('[server]\n')
-        file.write('library_path=~/Music\n') # TODO replace ~ by /home/user
+        default_music_folder=Path.home().joinpath('Music')
+        file.write('library_path={}\n'.format(str(default_music_folder)))
         file.write('\n')
         file.write('[urls]\n')
         file.write('# Add your URLs below (eg. franceinter=http://direct.franceinter.fr/live/franceinter-midfi.mp3\n')

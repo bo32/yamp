@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Devices</title>
+
+</head>
+<body>
+    <h3>Devices</h3>
+    {% for device in devices %}
+        <p>{{ device }}<button onclick="connect()"> Connect</button></p>
+    {% endfor %}
+    
+    <h3>Paired devices</h3>
+    {% for paired_device in paired_devices %}
+        <p>{{ paired_device }}<button onclick="connect()"> Connect</button></p>
+    {% endfor %}
+
+    <script src="{% static 'js/devices.js' %}"></script>
+</body>
