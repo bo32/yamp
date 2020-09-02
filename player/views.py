@@ -20,7 +20,7 @@ def show_player(request):
 
     content = {
         'current_track': current_track,
-        'folder': folder,
+        'folder': sorted(folder),
         'urls': urls
     }
 

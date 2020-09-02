@@ -12,6 +12,12 @@ def play(request, album):
 #     return HttpResponse('PLAYING')
     return JsonResponse(current_track)
 
+
+def play_index(request, index):
+    PlayerService().play_index(index)
+    current_track = PlayerService().get_current_track()
+    return JsonResponse(current_track)
+
 @require_http_methods(["GET"])
 def next(request):
     PlayerService().next()

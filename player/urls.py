@@ -7,6 +7,7 @@ from player import views
 urlpatterns = [
     path('', views.show_player, name='player'),
     path('play/<album>', rest.play),
+    path('play/album/<int:index>', rest.play_index),
     path('pause/', rest.pause),
     path('next/', rest.next),
     path('previous/', rest.previous),
