@@ -1,6 +1,9 @@
 import vlc
 import os
 
+from player.global_properties import global_properties
+from pathlib import Path
+
 VOLUME_STEP = 5
 VOLUME_MAX = 100
 VOLUME_MIN = 0
@@ -88,20 +91,28 @@ class PlayerService(object):
     def previous(self):
         self.list_player.previous()
 
-    def play(self, directory):
-        from player.global_properties import global_properties
-        from pathlib import Path
-        library_folder = Path(global_properties['server']['library_path'])
-        dir_to_play = library_folder.joinpath(directory)
-        print('playing album ' + str(dir_to_play))
+    def get_library_folder(self):
+        return Path(global_properties['server']['library_path'])
+
+    def play_index(self, index):
+        library_folder_albums = [x for x in sorted(self.get_library_folder().iterdir()) if x.is_dir()]
+        self.__play_folder(library_folder_albums[index])
+
+    def __play_folder(self, folder):
+        print('playing album ' + str(folder))
 
         self.played_album = self.instance.media_list_new()
-        self.add_folder_to_playlist(dir_to_play)
+        self.add_folder_to_playlist(folder)
 
         self.list_player.stop() # clear current playlist
         self.list_player.set_media_list(self.played_album)
         self.list_player.play()
         print('Playing music...')
+
+    def play(self, directory):
+        library_folder = self.get_library_folder()
+        dir_to_play = library_folder.joinpath(directory)
+        self.__play_folder(dir_to_play)
 
     def add_folder_to_playlist(self, folder):
         for file in sorted(folder.iterdir()):
