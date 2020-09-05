@@ -25,3 +25,7 @@ import player.global_properties
 from devices.services.gamepad_service import GamepadService
 
 GamepadService().attach_gamepad()
+
+from nfc_reader.services.nfc_service import NfcService
+
+NfcService().start()

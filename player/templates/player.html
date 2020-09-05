@@ -10,7 +10,8 @@
 
 </head>
 <body>
-<p>Currently playing: <div id="current_track_title">{{ current_track.title }}</div></p>
+    {% comment %} TODO: need to implement a websocket to udpate the track being played {% endcomment %}
+    <p>Currently playing: <div id="current_track_title">{{ current_track.title }}</div></p>
 
     <button onclick="previous()">Previous</button>
     <button onclick="pause()">Pause</button>
