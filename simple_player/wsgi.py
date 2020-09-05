@@ -21,3 +21,7 @@ import player.global_properties
 # TODO Add option to auto turn off
 
 # TODO enable gamepads controlling
+
+from devices.services.gamepad_service import GamepadService
+
+GamepadService().attach_gamepad()

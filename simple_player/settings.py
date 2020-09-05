@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'player',
+    'devices',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,7 @@ PORT = '8000'
 
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'player', 'static'),
+    os.path.join(BASE_DIR, 'devices', 'static'),
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
