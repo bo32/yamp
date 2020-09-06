@@ -25,7 +25,6 @@ class NfcService():
         
 
     def _start(self):
-
         while True:
             # Check if a card is available to read
             uid = self.pn532.read_passive_target(timeout=0.5)
@@ -46,24 +45,32 @@ class NfcService():
     # TODO use a callback here maybe?
     def read_value(self):
         result = ''
-        for i in range(135):
+        end_of_nfc_value = False # We loop until we reach the end of NFC value (00)
+        # Here we start reading NFC value from 6, as the beginning is not related to the stored value
+        for i in range(6, 135):
             try:
                 for x in self.pn532.ntag2xx_read_block(i):
-                    print('%02X' % x)
+                    value = '%02X' % x
+                    if value == '00':
+                        end_of_nfc_value = True
+                        break
                     result = result + ('%02X' % x) + ' '
             except nfc.PN532Error as e:
                 print(e.errmsg)
                 break  
+            if end_of_nfc_value is True:
+                break
         print('Encoded result: {}'.format(result))
         raw_result = bytes.fromhex(result).decode("latin-1")
         print('Decoded result: {}'.format(raw_result))
         self.process_value(raw_result)
 
     def process_value(self, decoded_value):
-        curated_url = self._curate_url(decoded_value)
-        print('Curated URL: {}'.format(curated_url))
+        # curated_url = self._curate_url(decoded_value)
+        print('Curated URL: {}'.format(decoded_value))
 
         # TODO technically, we should not store an entire URL in the NFC tag, but an folder index or folder name instead should be good enough.
+        # That would help scanning the value faster 
         # The server can be retreived with hostname functions...
         import requests
         requests.get(curated_url)
