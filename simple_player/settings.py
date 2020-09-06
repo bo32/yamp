@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'player',
     'devices',
+    'nfc_reader',
 ]
 
 MIDDLEWARE = [

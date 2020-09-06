@@ -50,8 +50,7 @@ class NfcService():
         for i in range(6, 135):
             try:
                 for x in self.pn532.ntag2xx_read_block(i):
-                    value = '%02X' % x
-                    if value == '00':
+                    if x == 0x00:
                         end_of_nfc_value = True
                         break
                     result = result + ('%02X' % x) + ' '
