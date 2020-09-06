@@ -42,6 +42,6 @@ Source: https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-
 
 ## About this project
 
-This project is strongly inspired by (this other one)[https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-3be63d].  
-The NFC reader used is the (PN532_NFC_HAT)[https://www.waveshare.com/wiki/PN532_NFC_HAT].  
+This project is strongly inspired by [this other one](https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-3be63d).  
+The NFC reader used is the [PN532_NFC_HAT](https://www.waveshare.com/wiki/PN532_NFC_HAT).  
 
