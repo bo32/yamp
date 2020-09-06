@@ -66,8 +66,8 @@ class NfcService():
         self.process_value(raw_result)
 
     def process_value(self, decoded_value):
-        # curated_url = self._curate_url(decoded_value)
-        print('Curated URL: {}'.format(decoded_value))
+        curated_url = self._curate_url(decoded_value)
+        print('Curated URL: {}'.format(curated_url))
 
         # TODO technically, we should not store an entire URL in the NFC tag, but an folder index or folder name instead should be good enough.
         # That would help scanning the value faster 
@@ -80,7 +80,7 @@ class NfcService():
         '''
         We expect to retrieve a URL starting with `http` and ending with `/`.
         '''
-        from_ = raw_decoded_url.index("http")
+        # from_ = raw_decoded_url.index("http")
         to_ = raw_decoded_url.rfind('/')
-        return raw_decoded_url[from_:to_]
+        return raw_decoded_url[:to_]
     

@@ -17,15 +17,16 @@ application = get_wsgi_application()
 
 # Load global properties
 import player.global_properties
+from player.global_properties import get_boolean_property_value
 
 # TODO Add option to auto turn off
 
-# TODO enable gamepads controlling
+if get_boolean_property_value('server', 'enable_gamepads'):
+    print('Enabling gamepads service...')
+    from devices.services.gamepad_service import GamepadService
+    GamepadService().attach_gamepad()
 
-from devices.services.gamepad_service import GamepadService
-
-GamepadService().attach_gamepad()
-
-from nfc_reader.services.nfc_service import NfcService
-
-NfcService().start()
+if get_boolean_property_value('server', 'enable_nfc_scanning'):
+    print('Enabling NFC service...')
+    from nfc_reader.services.nfc_service import NfcService
+    NfcService().start()
