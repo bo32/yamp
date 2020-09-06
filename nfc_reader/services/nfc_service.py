@@ -80,7 +80,7 @@ class NfcService():
         '''
         We expect to retrieve a URL starting with `http` and ending with `/`.
         '''
-        # from_ = raw_decoded_url.index("http")
-        to_ = raw_decoded_url.rfind('/')
-        return raw_decoded_url[:to_]
+        if raw_decoded_url[-1] == '/':
+            return raw_decoded_url[:-1]
+        return raw_decoded_url
     
